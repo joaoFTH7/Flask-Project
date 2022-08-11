@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gamebrary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+  </head>
+  <body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul id="messages" class="list-unstyled">
+                        {% for message in messages %}
+                            <li class="alert alert-success">{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+        {% endwith %}
+        <h1>Sign In</h1>
+        <form method="POST" action="{{ url_for('auth') }}">
+            {{ form_user.csrf_token() }}
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="form-group">
+                {{ form_user.nick.label(class="form-label")}}
+                {{ form_user.nick(class="form-control")}}
+            </div>
+            <div class="form-group">
+                {{ form_user.password.label(class="form-label")}}
+                {{ form_user.password(class="form-control")}}
+            </div>
+            <div>
+                <p></p>
+                {{ form_user.input_save(class="btn btn-primary")}}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

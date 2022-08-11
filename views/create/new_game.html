@@ -1,0 +1,35 @@
+{% extends "layouts/template.html" %}
+{% block content %}
+    <head>
+      <link rel="stylesheet" href="{{ url_for('static', filename='app.css')}}">
+    </head>
+      <form class="formGame" action="{{ url_for('create') }}" method="post" enctype="multipart/form-data"> 
+        <figure class="img thumbnail col-md-4 formImage">
+          <img class="img-fluid" src="{{ url_for('image_cover', coverfile='capa_padrao.jpg') }}">
+          <figcaption>
+            <label class="fileContainer">
+              Change Cover
+              <input type="file" name="filename" accept=".jpg">
+            </label>
+          </figcaption>
+        </figure>
+        <fieldset>
+          {{ form_game.csrf_token()}}
+          <div class="form-group inputBox">
+            {{ form_game.name.label(class="form-label") }}
+            {{ form_game.name(class="form-control")}}
+          </div>
+          <div class="form-group inputBox">
+            {{ form_game.category.label(class="form-label") }}
+            {{ form_game.category(class="form-control") }}
+          </div>
+          <div class="form-group inputBox">
+            {{ form_game.console.label(class="form-label") }}
+            {{ form_game.console(class="form-control") }}
+          </div>
+          <div class="form-group buttons">
+          {{ form_game.input_save(class="btn btn-primary") }}
+          </div>
+        </fieldset>
+      </form>
+{% endblock %}
